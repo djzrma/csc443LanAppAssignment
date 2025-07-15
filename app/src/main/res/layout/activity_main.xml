@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/nameTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/nameTextFieldHint"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:text="@string/nameTextField"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextContrastCheck" />
+
+            <EditText
+                android:id="@+id/descriptionTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/descriptionTextFieldHint"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:text="@string/descriptionTextField"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameTextField"
+                tools:ignore="TextContrastCheck" />
+
+            <EditText
+                android:id="@+id/addressTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/addressTextFieldHint"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:text="@string/addressTextField"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionTextField"
+                tools:ignore="VisualLintTextFieldSize" />
+
+            <EditText
+                android:id="@+id/cityTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/cityTextFieldHint"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:text="@string/cityTextField"
+                app:layout_constraintEnd_toStartOf="@+id/stateTextField"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addressTextField"
+                tools:ignore="TextContrastCheck" />
+
+            <EditText
+                android:id="@+id/stateTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/stateTextFieldHint"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:text="@string/stateTextField"
+                app:layout_constraintEnd_toStartOf="@+id/zipCodeTextField"
+                app:layout_constraintStart_toEndOf="@+id/cityTextField"
+                app:layout_constraintTop_toBottomOf="@+id/addressTextField"
+                tools:ignore="TextContrastCheck" />
+
+            <EditText
+                android:id="@+id/zipCodeTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/zipCodeTextFieldHint"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:text="@string/zipCodeTextField"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/stateTextField"
+                app:layout_constraintTop_toBottomOf="@+id/addressTextField"
+                tools:ignore="TextContrastCheck" />
+
+            <EditText
+                android:id="@+id/locationCodeTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/locationCodeTextFieldHint"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:text="@string/locationCodeTextField"
+                app:layout_constraintEnd_toStartOf="@+id/locationPhoneTextField"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cityTextField"
+                tools:ignore="TextContrastCheck" />
+
+            <EditText
+                android:id="@+id/locationPhoneTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/locationPhoneTextFieldHint"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:text="@string/locationPhoneTextField"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/locationCodeTextField"
+                app:layout_constraintTop_toBottomOf="@+id/zipCodeTextField"
+                tools:ignore="TextFields,TextContrastCheck" />
+
+            <EditText
+                android:id="@+id/locationManagerTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/locationManagerTextFieldHint"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:text="@string/locationManagerTextField"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/locationPhoneTextField"
+                tools:ignore="TextContrastCheck" />
+
+            <EditText
+                android:id="@+id/dateOfConfigurationTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/dateOfConfigurationTextFieldHint"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:text="@string/dateOfConfigurationTextField"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/locationManagerTextField"
+                tools:ignore="TextFields,TextContrastCheck" />
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="128dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="48dp"
+                android:text="@string/cancelButton"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dateOfConfigurationTextField" />
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="128dp"
+                android:layout_height="64dp"
+                android:layout_marginEnd="48dp"
+                android:text="@string/saveButton"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dateOfConfigurationTextField" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="64dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/toggleButton"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/saveButton" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
