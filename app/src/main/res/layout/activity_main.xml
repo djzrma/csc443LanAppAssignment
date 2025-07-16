@@ -46,6 +46,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appNameTextView" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
@@ -260,6 +261,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/activitySwitchConfirmation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:text="@string/activitySwitchConfirmation"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@+id/mapsImageButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <ImageButton
                 android:id="@+id/lanImageButton"
                 android:layout_width="0dp"
@@ -274,6 +286,7 @@
                 android:id="@+id/mapsImageButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/settingsImageButton"
                 app:layout_constraintStart_toEndOf="@+id/lanImageButton"
                 app:srcCompat="@drawable/ic_action_maps"
@@ -283,11 +296,13 @@
                 android:id="@+id/settingsImageButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/mapsImageButton"
-                app:srcCompat="@drawable/ic_action_settings" />
+                app:srcCompat="@drawable/ic_action_settings"
+                tools:ignore="SpeakableTextPresentCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

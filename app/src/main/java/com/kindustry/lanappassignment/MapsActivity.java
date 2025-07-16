@@ -12,13 +12,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+public class MapsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_maps);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         lanActivityButton();
-        mapsActivityButton();
         settingsActivityButton();
+        mapsActivityButton();
         activitySwitchMessage();
     }
 
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         lanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                Intent intent = new Intent(MapsActivity.this, MainActivity.class);
                 String passedMessage = "You are now on Lan Screen";
                 intent.putExtra("lanMessage", passedMessage);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -44,12 +44,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private void mapsActivityButton(){
         ImageButton mapsButton = findViewById(R.id.mapsImageButton);
         mapsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                Intent intent = new Intent(MapsActivity.this, MapsActivity.class);
                 String passedMessage = "You are now on Maps Screen";
                 intent.putExtra("mapsMessage", passedMessage);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                Intent intent = new Intent(MapsActivity.this, SettingsActivity.class);
                 String passedMessage = "You are now on Settings Screen";
                 intent.putExtra("settingsMessage", passedMessage);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -72,10 +73,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void activitySwitchMessage(){
+    private void activitySwitchMessage() {
         Intent intent = getIntent();
         TextView message = findViewById(R.id.activitySwitchConfirmation);
-        String tempString = intent.getStringExtra("lanMessage");
+        String tempString = intent.getStringExtra("mapsMessage");
         message.setText(tempString);
     }
 }
