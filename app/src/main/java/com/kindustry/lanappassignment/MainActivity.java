@@ -3,8 +3,11 @@ package com.kindustry.lanappassignment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,10 +28,53 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        initToggleButton();
         lanActivityButton();
         mapsActivityButton();
         settingsActivityButton();
         activitySwitchMessage();
+    }
+
+    //method call for toggle button
+    private void initToggleButton() {
+        final ToggleButton toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
+        toggleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setForEditing(toggleButton.isChecked());
+                setForEditing(true);
+            }
+        });
+    }
+
+    //method call for toggle button behavior
+    private void setForEditing(boolean enabled){
+        EditText nameText = findViewById(R.id.nameTextField);
+        nameText.setEnabled(enabled);
+        EditText descriptionText = findViewById(R.id.descriptionTextField);
+        descriptionText.setEnabled(enabled);
+        EditText addressText = findViewById(R.id.addressTextField);
+        addressText.setEnabled(enabled);
+        EditText cityText = findViewById(R.id.cityTextField);
+        cityText.setEnabled(enabled);
+        EditText stateText = findViewById(R.id.stateTextField);
+        stateText.setEnabled(enabled);
+        EditText zipCodeText = findViewById(R.id.zipCodeTextField);
+        zipCodeText.setEnabled(enabled);
+        EditText locationCodeText = findViewById(R.id.locationCodeTextField);
+        locationCodeText.setEnabled(enabled);
+        EditText locationPhoneText = findViewById(R.id.locationPhoneTextField);
+        locationPhoneText.setEnabled(enabled);
+        EditText locationManagerText = findViewById(R.id.locationManagerTextField);
+        locationManagerText.setEnabled(enabled);
+        EditText dateOfConfigurationText = findViewById(R.id.dateOfConfigurationTextField);
+        dateOfConfigurationText.setEnabled(enabled);
+        if (enabled) {
+            nameText.requestFocus();
+        } else {
+            ScrollView scrollView = findViewById(R.id.lanInfoScroll);
+            scrollView.fullScroll(ScrollView.FOCUS_UP);
+        }
     }
 
     //method to switch to Lan Activity
