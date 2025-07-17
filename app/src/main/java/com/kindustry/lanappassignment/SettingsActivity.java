@@ -31,6 +31,7 @@ public class SettingsActivity extends AppCompatActivity {
         activitySwitchMessage();
     }
 
+    //method to switch to Lan Activity
     private void lanActivityButton(){
         ImageButton lanButton = findViewById(R.id.lanImageButton);
         lanButton.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +46,7 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+    //method to switch to Maps Activity
     private void mapsActivityButton(){
         ImageButton mapsButton = findViewById(R.id.mapsImageButton);
         mapsButton.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +61,7 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+    //method to switch to Settings Activity
     private void settingsActivityButton(){
         ImageButton settingsButton = findViewById(R.id.settingsImageButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +76,7 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+    //method to display activity switch confirmation message
     private void activitySwitchMessage() {
         Intent intent = getIntent();
         TextView message = findViewById(R.id.activitySwitchConfirmation);

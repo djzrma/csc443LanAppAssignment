@@ -11,12 +11,12 @@
         android:id="@+id/imageButtonLayout"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -27,8 +27,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
-                android:text="@string/activitySwitchConfirmation"
                 android:gravity="center"
+                android:text="@string/activitySwitchConfirmation"
                 app:layout_constraintBottom_toTopOf="@+id/mapsImageButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -41,7 +41,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/mapsImageButton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/ic_action_lan"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
             <ImageButton
                 android:id="@+id/mapsImageButton"
@@ -51,7 +51,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/settingsImageButton"
                 app:layout_constraintStart_toEndOf="@+id/lanImageButton"
                 app:srcCompat="@drawable/ic_action_maps"
-                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             <ImageButton
                 android:id="@+id/settingsImageButton"
@@ -61,7 +61,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/mapsImageButton"
                 app:srcCompat="@drawable/ic_action_settings"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
