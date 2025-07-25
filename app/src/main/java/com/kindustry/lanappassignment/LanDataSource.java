@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 public class LanDataSource {
     private SQLiteDatabase database;
     private LanDBHelper dbHelper;
@@ -34,7 +36,7 @@ public class LanDataSource {
             initialValues.put("locationPhone", lan.getLocationPhone());
             initialValues.put("locationManager", lan.getLocationManager());
             initialValues.put("dateOfConfiguration", lan.getDateOfConfiguration());
-            didSucceed = database.insert("rental", null, initialValues) > 0;
+            didSucceed = database.insert("lan", null, initialValues) > 0;
         } catch (Exception e) {
             // throw new RuntimeException(e);
         }
@@ -79,7 +81,27 @@ public class LanDataSource {
             lastId = -1;
         }
         return lastId;
+    }
 
+    //method call to populate a list of LANs in mainActivity
+    public ArrayList<String> getLanNames() {
+
+        ArrayList<String> lanNames = new ArrayList<>();
+        try {
+            String query = "select lanName from lans";
+            Cursor cursor = database.rawQuery(query, null);
+
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) { //loop through all the records in the cursor
+                lanNames.add(cursor.getString(0));
+                cursor.moveToNext();
+            }
+            cursor.close();
+
+        } catch (Exception e) {
+            lanNames = new ArrayList<String>();
+        }
+        return lanNames;
     }
 }
 

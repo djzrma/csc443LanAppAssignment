@@ -15,21 +15,21 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+public class AddLAN extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_add_lan);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         initToggleButton();
-        lanActivityButton();
+        setForEditing(true);
+        lanListActivityButton();
         mapsActivityButton();
         settingsActivityButton();
         activitySwitchMessage();
@@ -77,15 +77,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //method to switch to Lan Activity
-    private void lanActivityButton(){
-        ImageButton lanButton = findViewById(R.id.lanImageButton);
-        lanButton.setOnClickListener(new View.OnClickListener() {
+    //switches to Lan List activity
+    private void lanListActivityButton() {
+        ImageButton lanListButton = findViewById(R.id.lanListImageButton);
+        lanListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                String passedMessage = "You are now on Lan Screen";
-                intent.putExtra("lanMessage", passedMessage);
+                Intent intent = new Intent(AddLAN.this, LanListActivity.class);
+                String passedMessage = "You are now on the LAN List screen";
+                intent.putExtra("lanListMessage", passedMessage);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         mapsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                Intent intent = new Intent(AddLAN.this, MapsActivity.class);
                 String passedMessage = "You are now on Maps Screen";
                 intent.putExtra("mapsMessage", passedMessage);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                Intent intent = new Intent(AddLAN.this, SettingsActivity.class);
                 String passedMessage = "You are now on Settings Screen";
                 intent.putExtra("settingsMessage", passedMessage);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
     private void activitySwitchMessage(){
         Intent intent = getIntent();
         TextView message = findViewById(R.id.activitySwitchConfirmation);
-        String tempString = intent.getStringExtra("lanMessage");
+        String tempString = intent.getStringExtra("addLanMessage");
         message.setText(tempString);
     }
 }

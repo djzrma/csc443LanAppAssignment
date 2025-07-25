@@ -13,7 +13,7 @@ public class LanDBHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = -1;
 
     private static final String CREATE_TABLE_LANS = //a string variable for query
-            "create table rental (_id integer primary key autoincrement, "
+            "create table lans (_id integer primary key autoincrement, "
                     + "lanName text not null, description text not null,"
                     + "address text not null, city text not null, state text not null,"
                     + "zipCode text not null, locationCode text not null, locationPhone int not null,locationManager text not null, dateOfConfiguration text not null);";

@@ -25,40 +25,41 @@ public class MapsActivity extends AppCompatActivity {
             return insets;
         });
 
-        lanActivityButton();
+        lanListActivityButton();
+        addLanActivityButton();
         settingsActivityButton();
-        mapsActivityButton();
         activitySwitchMessage();
     }
 
-    //method to switch to Lan Activity
-    private void lanActivityButton(){
-        ImageButton lanButton = findViewById(R.id.lanImageButton);
-        lanButton.setOnClickListener(new View.OnClickListener() {
+    //switches to Lan List activity
+    private void lanListActivityButton() {
+        ImageButton lanListButton = findViewById(R.id.lanListImageButton);
+        lanListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MapsActivity.this, MainActivity.class);
-                String passedMessage = "You are now on Lan Screen";
-                intent.putExtra("lanMessage", passedMessage);
+                Intent intent = new Intent(MapsActivity.this, LanListActivity.class);
+                String passedMessage = "You are now on the LAN List screen";
+                intent.putExtra("lanListMessage", passedMessage);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
     }
 
-    //method to switch to Maps Activity
-    private void mapsActivityButton(){
-        ImageButton mapsButton = findViewById(R.id.mapsImageButton);
-        mapsButton.setOnClickListener(new View.OnClickListener() {
+    //switches to Add Lan Activity
+    private void addLanActivityButton() {
+        ImageButton addLanButton = findViewById(R.id.addLanImageButton);
+        addLanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MapsActivity.this, MapsActivity.class);
-                String passedMessage = "You are now on Maps Screen";
-                intent.putExtra("mapsMessage", passedMessage);
+                Intent intent = new Intent(MapsActivity.this, AddLAN.class);
+                String passedMessage = "You are now on the Add LAN screen";
+                intent.putExtra("addLanMessage", passedMessage);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
+
     }
 
     //method to switch to Settings Activity
@@ -77,7 +78,7 @@ public class MapsActivity extends AppCompatActivity {
     }
 
     //method to display activity switch confirmation message
-    private void activitySwitchMessage() {
+    private void activitySwitchMessage(){
         Intent intent = getIntent();
         TextView message = findViewById(R.id.activitySwitchConfirmation);
         String tempString = intent.getStringExtra("mapsMessage");

@@ -48,6 +48,7 @@
     <string name="saveButton">Save</string>
     <string name="addANetworkButton">Add A Network</string>
     <string name="dateOfConfigurationTextFieldHint">Date of Configuration</string>
-    <string name="appNameTextView">Local Area Network Navigator</string>
+    <string name="appNameTextView">Add a Lan to the Network</string>
     <string name="activitySwitchConfirmation" />
+    <string name="addLanSaveButton">Save</string>
 </resources>

@@ -11,12 +11,12 @@
         android:id="@+id/imageButtonLayout"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0"
+        tools:ignore="NotSibling,RtlHardcoded">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -34,14 +34,24 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageButton
-                android:id="@+id/lanImageButton"
+                android:id="@+id/lanListImageButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/addLanImageButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/ic_action_lan_list"
+                tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <ImageButton
+                android:id="@+id/addLanImageButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/mapsImageButton"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_action_lan"
-                tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+                app:layout_constraintStart_toEndOf="@+id/lanListImageButton"
+                app:srcCompat="@drawable/ic_action_add_lan"
+                tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
 
             <ImageButton
                 android:id="@+id/mapsImageButton"
@@ -49,7 +59,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/settingsImageButton"
-                app:layout_constraintStart_toEndOf="@+id/lanImageButton"
+                app:layout_constraintStart_toEndOf="@+id/addLanImageButton"
                 app:srcCompat="@drawable/ic_action_maps"
                 tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -61,8 +71,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/mapsImageButton"
                 app:srcCompat="@drawable/ic_action_settings"
-                tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
+                tools:ignore="ContentDescription,SpeakableTextPresentCheck,ImageContrastCheck" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
