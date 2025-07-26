@@ -71,7 +71,7 @@ public class LanDataSource {
     public int getLastLanId(){
         int lastId;
         try {
-            String query = "Select max(_id) from rental";
+            String query = "Select max(_id) from lan";
             Cursor cursor = database.rawQuery(query, null); //cursor is an object that used to hold and move through the results
 
             cursor.moveToFirst();

@@ -1,8 +1,13 @@
 package com.kindustry.lanappassignment;
 
+import static com.google.android.material.internal.ViewUtils.hideKeyboard;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
@@ -16,6 +21,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class AddLAN extends AppCompatActivity {
+    private LAN currentLan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +35,74 @@ public class AddLAN extends AppCompatActivity {
         });
         initToggleButton();
         setForEditing(true);
+        saveButton();
         lanListActivityButton();
         mapsActivityButton();
         settingsActivityButton();
         activitySwitchMessage();
+    }
+
+    //method depicting behavior for saveButton on AddLANActivity
+    private void saveButton(){
+        Button saveButton = findViewById(R.id.addLanSaveButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean wasSuccessful;
+                hideKeyboard();
+                LanDataSource lanDS = new LanDataSource(AddLAN.this);
+
+                try {
+                    lanDS.open();
+
+                    if (currentLan.getLanID() == -1){
+                        //if the database opens and is a new Rental record, save it
+                        //if -1 we will insert data
+                        wasSuccessful = lanDS.insertLan(currentLan);
+                        //successfully opened, get the ID we will use
+                        if (wasSuccessful){
+                            int newId = lanDS.getLastLanId();
+                            currentLan.setLanID(newId);
+                        }
+                    } else {
+                        //if the database opens and there is an existing rental record, update it
+                        wasSuccessful = lanDS.updateLan(currentLan);
+                    }
+                    lanDS.close(); //close the database
+                    } catch (Exception e){
+                    wasSuccessful = false;
+                }
+                if (wasSuccessful){
+                    ToggleButton editToggle = findViewById(R.id.toggleButton);
+                    editToggle.toggle();
+                    setForEditing(false);
+                }
+            }
+        });
+    }
+
+    private void hideKeyboard(){
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        EditText lanName = findViewById(R.id.nameTextField);
+        imm.hideSoftInputFromWindow(lanName.getWindowToken(),0);
+        EditText lanDescription = findViewById(R.id.descriptionTextField);
+        imm.hideSoftInputFromWindow(lanDescription.getWindowToken(), 0);
+        EditText lanAddress = findViewById(R.id.addressTextField);
+        imm.hideSoftInputFromWindow(lanAddress.getWindowToken(),0);
+        EditText lanCity = findViewById(R.id.cityTextField);
+        imm.hideSoftInputFromWindow(lanCity.getWindowToken(),0);
+        EditText lanState = findViewById(R.id.stateTextField);
+        imm.hideSoftInputFromWindow(lanState.getWindowToken(),0);
+        EditText lanZipCode = findViewById(R.id.zipCodeTextField);
+        imm.hideSoftInputFromWindow(lanZipCode.getWindowToken(),0);
+        EditText lanLocationCode = findViewById(R.id.locationCodeTextField);
+        imm.hideSoftInputFromWindow(lanLocationCode.getWindowToken(),0);
+        EditText lanLocationPhone = findViewById(R.id.locationPhoneTextField);
+        imm.hideSoftInputFromWindow(lanLocationPhone.getWindowToken(),0);
+        EditText lanLocationManager = findViewById(R.id.locationManagerTextField);
+        imm.hideSoftInputFromWindow(lanLocationManager.getWindowToken(),0);
+        EditText dateOfConfiguration = findViewById(R.id.dateOfConfigurationTextField);
+        imm.hideSoftInputFromWindow(dateOfConfiguration.getWindowToken(), 0);
     }
 
     //method call for toggle button

@@ -39,7 +39,7 @@ public class LAN {
         this.LanID = lanID;
     }
     public int getLanID(){
-        return this.LanID;
+        return LanID;
     }
     public void setName(String name){
         this.name = name;

@@ -1,12 +1,15 @@
 package com.kindustry.lanappassignment;
 
 import android.content.Intent;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.activity.EdgeToEdge;
@@ -14,6 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class LanListActivity extends AppCompatActivity {
 
@@ -32,6 +39,22 @@ public class LanListActivity extends AppCompatActivity {
         mapsActivityButton();
         settingsActivityButton();
         activitySwitchMessage();
+
+        LanDataSource lanDS = new LanDataSource(this);
+
+        ArrayList<String> lanList;
+        try{
+            lanDS.open();
+            lanList = lanDS.getLanNames();
+            lanDS.close();
+            RecyclerView lans = findViewById(R.id.lanRecyclerView);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+            lans.setLayoutManager(layoutManager);
+            LanAdapter lanAdapter = new LanAdapter(lanList);
+            lans.setAdapter(lanAdapter);
+        } catch (SQLException e){
+            Toast.makeText(this, "Error retrieving lans", Toast.LENGTH_LONG).show();
+        }
     }
 
     //switches to Add Lan Activity
