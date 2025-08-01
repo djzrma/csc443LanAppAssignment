@@ -22,7 +22,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+//this is the "main" method
 public class LanListActivity extends AppCompatActivity {
+
+    ArrayList<LAN> lanList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,28 +39,44 @@ public class LanListActivity extends AppCompatActivity {
             return insets;
         });
 
-        addLanActivityButton();
-        mapsActivityButton();
-        settingsActivityButton();
-        activitySwitchMessage();
-
         LanDataSource lanDS = new LanDataSource(this);
+        populateDB(lanDS);
 
-        ArrayList<String> lanList;
         try{
             lanDS.open();
-            lanList = lanDS.getLanNames();
+            lanList = lanDS.getLanInfo();
             lanDS.close();
             RecyclerView lans = findViewById(R.id.lanRecyclerView);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
             lans.setLayoutManager(layoutManager);
-            LanAdapter lanAdapter = new LanAdapter(lanList);
+            LanAdapter lanAdapter = new LanAdapter(this, lanList);
             lans.setAdapter(lanAdapter);
         } catch (SQLException e){
             Toast.makeText(this, "Error retrieving lans", Toast.LENGTH_LONG).show();
         }
+
+        addLanActivityButton();
+        mapsActivityButton();
+        settingsActivityButton();
+        activitySwitchMessage();
     }
 
+    private void populateDB(LanDataSource lanDS){
+        LAN lan1 = new LAN();
+        lan1.setLanID(1234);
+        lan1.setName("lan1");
+        lan1.setDescription("first lan");
+        lan1.setAddress("123 lan blvd.");
+        lan1.setCity("San Diego");
+        lan1.setState("California");
+        lan1.setZipCode("92543");
+        lan1.setLocationCode("456");
+        lan1.setLocationPhone("909-552-1256");
+        lan1.setLocationManager("Donavan");
+        lan1.setDateOfConfiguration("07/22/2025");
+
+        lanDS.insertLan(lan1);
+    }
     //switches to Add Lan Activity
     private void addLanActivityButton() {
         ImageButton addLanButton = findViewById(R.id.addLanImageButton);

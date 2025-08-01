@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class LanDataSource {
@@ -18,7 +19,9 @@ public class LanDataSource {
         database = dbHelper.getWritableDatabase();
     }
     public void close(){
-        dbHelper.close();
+        if (database != null && database.isOpen()) {
+            database.close(); // this explicitly closes the database connection
+        }
     }
 
     //inserts lan into DB
@@ -36,7 +39,7 @@ public class LanDataSource {
             initialValues.put("locationPhone", lan.getLocationPhone());
             initialValues.put("locationManager", lan.getLocationManager());
             initialValues.put("dateOfConfiguration", lan.getDateOfConfiguration());
-            didSucceed = database.insert("lan", null, initialValues) > 0;
+            didSucceed = database.insert("lans", null, initialValues) > 0;
         } catch (Exception e) {
             // throw new RuntimeException(e);
         }
@@ -71,7 +74,7 @@ public class LanDataSource {
     public int getLastLanId(){
         int lastId;
         try {
-            String query = "Select max(_id) from lan";
+            String query = "Select max(lanID) from lans";
             Cursor cursor = database.rawQuery(query, null); //cursor is an object that used to hold and move through the results
 
             cursor.moveToFirst();
@@ -83,12 +86,43 @@ public class LanDataSource {
         return lastId;
     }
 
+    public ArrayList<LAN> getLanInfo(){
+        ArrayList<LAN> lanList = new ArrayList<LAN>();
+
+        try {
+            String query = "SELECT * FROM lans";
+            Cursor cursor = database.rawQuery(query, null);
+            LAN newLan;
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()){
+                newLan = new LAN();
+                newLan.setLanID(cursor.getInt(0));
+                newLan.setName(cursor.getString(1));
+                newLan.setDescription(cursor.getString(2));
+                newLan.setAddress(cursor.getString(3));
+                newLan.setCity(cursor.getString(4));
+                newLan.setState(cursor.getString(5));
+                newLan.setZipCode(cursor.getString(6));
+                newLan.setLocationCode(cursor.getString(7));
+                newLan.setLocationPhone(cursor.getString(8));
+                newLan.setLocationManager(cursor.getString(9));
+                newLan.setDateOfConfiguration(cursor.getString(10));
+                cursor.moveToNext();
+            }
+            cursor.close();
+        } catch (Exception e){
+            lanList = new ArrayList<LAN>();
+        }
+
+        return lanList;
+    }
     //method call to populate a list of LANs in mainActivity
     public ArrayList<String> getLanNames() {
 
         ArrayList<String> lanNames = new ArrayList<>();
         try {
-            String query = "select lanName from lans";
+            String query = "SELECT lanName FROM lans";
             Cursor cursor = database.rawQuery(query, null);
 
             cursor.moveToFirst();
@@ -102,6 +136,39 @@ public class LanDataSource {
             lanNames = new ArrayList<String>();
         }
         return lanNames;
+    }
+
+    // method call to pull a specific lan from the DB
+    public LAN getLan(int lanID){
+        LAN lan = new LAN();
+        String query = "SELECT * FROM lans WHERE lanID =" + lanID;
+        Cursor cursor = database.rawQuery(query, null);
+        if (cursor.moveToFirst()){
+            lan.setLanID(cursor.getInt(0));
+            lan.setName(cursor.getString(1));
+            lan.setDescription(cursor.getString(2));
+            lan.setAddress(cursor.getString(3));
+            lan.setCity(cursor.getString(4));
+            lan.setState(cursor.getString(5));
+            lan.setZipCode(cursor.getString(6));
+            lan.setLocationCode(cursor.getString(7));
+            lan.setLocationPhone(cursor.getString(8));
+            lan.setLocationManager(cursor.getString(9));
+            lan.setDateOfConfiguration(cursor.getString(10));
+            cursor.close();
+        }
+        return lan;
+    }
+
+    //method to remove a lan from the DB
+    public boolean deleteLan(int lanID){
+        boolean didDelete = false;
+        try {
+            didDelete = database.delete("lan", "lanID" + lanID, null) > 0;
+        }
+        catch (Exception e){
+        }
+        return didDelete;
     }
 }
 

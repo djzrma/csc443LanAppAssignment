@@ -51,4 +51,6 @@
     <string name="appNameTextView">Add a Lan to the Network</string>
     <string name="activitySwitchConfirmation" />
     <string name="addLanSaveButton">Save</string>
+    <string name="lanItemName" />
+    <string name="lanItemDescription" />
 </resources>

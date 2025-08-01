@@ -255,7 +255,7 @@
                         android:layout_width="120dp"
                         android:layout_height="60dp"
                         android:layout_marginTop="32dp"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:text="@string/addLanSaveButton"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
