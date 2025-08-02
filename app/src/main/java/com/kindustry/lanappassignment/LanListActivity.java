@@ -75,7 +75,9 @@ public class LanListActivity extends AppCompatActivity {
         lan1.setLocationManager("Donavan");
         lan1.setDateOfConfiguration("07/22/2025");
 
+        lanDS.open();
         lanDS.insertLan(lan1);
+        lanDS.close();
     }
     //switches to Add Lan Activity
     private void addLanActivityButton() {
@@ -113,7 +115,7 @@ public class LanListActivity extends AppCompatActivity {
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LanListActivity.this, SettingsActivity.class);
+                Intent intent = new Intent(LanListActivity.this, AndroidDatabaseManager.class);
                 String passedMessage = "You are now on Settings Screen";
                 intent.putExtra("settingsMessage", passedMessage);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

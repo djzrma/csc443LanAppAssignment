@@ -27,7 +27,6 @@ public class LanDataSource {
 
     //inserts lan into DB
     public boolean insertLan(LAN lan) {
-        open();
         boolean didSucceed = false;
         try {
             ContentValues initialValues = new ContentValues();
@@ -36,7 +35,7 @@ public class LanDataSource {
             initialValues.put("address",lan.getAddress());
             initialValues.put("city", lan.getCity());
             initialValues.put("state", lan.getState());
-            initialValues.put("zip_code", lan.getZipCode());
+            initialValues.put("zipCode", lan.getZipCode());
             initialValues.put("locationCode", lan.getLocationCode());
             initialValues.put("locationPhone", lan.getLocationPhone());
             initialValues.put("locationManager", lan.getLocationManager());
@@ -46,7 +45,6 @@ public class LanDataSource {
         } catch (Exception e) {
             // throw new RuntimeException(e);
         }
-        close();
         return didSucceed;
     }
 
@@ -91,27 +89,26 @@ public class LanDataSource {
     }
 
     public ArrayList<LAN> getLanInfo(){
-        ArrayList<LAN> lanList = new ArrayList<>();
+        ArrayList<LAN> lanList = new ArrayList<LAN>();
 
         try {
             String query = "SELECT * FROM lans";
             Cursor cursor = database.rawQuery(query, null);
-            LAN newLan;
             cursor.moveToFirst();
 
-            while (!cursor.isAfterLast()){
-                newLan = new LAN();
-                newLan.setLanID(cursor.getInt(0));
-                newLan.setName(cursor.getString(1));
-                newLan.setDescription(cursor.getString(2));
-                newLan.setAddress(cursor.getString(3));
-                newLan.setCity(cursor.getString(4));
-                newLan.setState(cursor.getString(5));
-                newLan.setZipCode(cursor.getString(6));
-                newLan.setLocationCode(cursor.getString(7));
-                newLan.setLocationPhone(cursor.getString(8));
-                newLan.setLocationManager(cursor.getString(9));
-                newLan.setDateOfConfiguration(cursor.getString(10));
+            while (!cursor.isAfterLast()) {
+                LAN tempLan = new LAN();
+                tempLan.setLanID(cursor.getInt(0));
+                tempLan.setName(cursor.getString(1));
+                tempLan.setDescription(cursor.getString(2));
+                tempLan.setAddress(cursor.getString(3));
+                tempLan.setCity(cursor.getString(4));
+                tempLan.setState(cursor.getString(5));
+                tempLan.setZipCode(cursor.getString(6));
+                tempLan.setLocationCode(cursor.getString(7));
+                tempLan.setLocationPhone(cursor.getString(8));
+                tempLan.setLocationManager(cursor.getString(9));
+                tempLan.setDateOfConfiguration(cursor.getString(10));
                 cursor.moveToNext();
             }
             cursor.close();

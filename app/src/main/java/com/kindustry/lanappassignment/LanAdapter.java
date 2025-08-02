@@ -9,15 +9,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LanAdapter extends RecyclerView.Adapter<LanAdapter.MyViewHolder> {
+public class LanAdapter extends RecyclerView.Adapter {
 
 
-    Context context;
-    ArrayList<LAN> lanList;
+    private Context context;
+    private ArrayList<LAN> lanList;
+    private static View.OnClickListener myOnItemClickListener;
+    private boolean isDeleting;
 
     // Constructor
     public LanAdapter(Context context, ArrayList<LAN> lanList) {
@@ -27,7 +31,7 @@ public class LanAdapter extends RecyclerView.Adapter<LanAdapter.MyViewHolder> {
 
     // ViewHolder class
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView lanName, lanDescription, lanAddress, lanCity, lanState, lanZipCode, lanLocationCode, lanLocationPhone, lanLocationManager, dateOfConfiguration;
+        public TextView lanName, lanDescription, lanAddress, lanCity, lanState, lanZipCode, lanLocationCode, lanLocationPhone, lanLocationManager, dateOfConfiguration;
 
         public MyViewHolder(@NonNull View itemView) {
 
@@ -43,31 +47,73 @@ public class LanAdapter extends RecyclerView.Adapter<LanAdapter.MyViewHolder> {
             lanLocationPhone = itemView.findViewById(R.id.locationPhoneTextField);
             lanLocationManager = itemView.findViewById(R.id.locationManagerTextField);
             dateOfConfiguration = itemView.findViewById(R.id.dateOfConfigurationTextField);
+            itemView.setTag(this);
+            itemView.setOnClickListener(myOnItemClickListener);
+        }
+
+        public TextView getLanNameTextView(){
+            return lanName;
+        }
+
+        public TextView getLanDescriptionTextView(){
+            return lanDescription;
+        }
+
+        public TextView getLanAddressTextView(){
+            return lanAddress;
+        }
+
+        public TextView getLanCityTextView(){
+            return lanCity;
+        }
+
+        public TextView getLanStateTextView(){
+            return lanState;
+        }
+
+        public TextView getLanZipCode(){
+            return lanZipCode;
+        }
+
+        public TextView getLanLocationCode(){
+            return lanLocationCode;
+        }
+
+        public TextView getLanLocationPhone(){
+            return lanLocationPhone;
+        }
+
+        public TextView getLanLocationManager(){
+            return lanLocationManager;
+        }
+
+        public TextView getDateOfConfiguration(){
+            return dateOfConfiguration;
         }
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.lan_item, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        LAN lanItem = lanList.get(position);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        MyViewHolder mvh = (MyViewHolder) holder;
 
-        holder.lanName.setText(lanItem.getName());
-        holder.lanDescription.setText(lanItem.getDescription());
-        holder.lanAddress.setText(lanItem.getAddress());
-        holder.lanCity.setText(lanItem.getCity());
-        holder.lanState.setText(lanItem.getState());
-        holder.lanZipCode.setText(lanItem.getZipCode());
-        holder.lanLocationCode.setText(lanItem.getLocationCode());
-        holder.lanLocationPhone.setText(lanItem.getLocationPhone());
-        holder.lanLocationManager.setText(lanItem.getLocationManager());
-        holder.dateOfConfiguration.setText(lanItem.getDateOfConfiguration());
+        mvh.lanName.setText(lanList.get(position).getName());
+        mvh.lanDescription.setText(lanList.get(position).getDescription());
+        mvh.lanAddress.setText(lanList.get(position).getAddress());
+        mvh.lanCity.setText(lanList.get(position).getCity());
+        mvh.lanState.setText(lanList.get(position).getState());
+        mvh.lanZipCode.setText(lanList.get(position).getZipCode());
+        mvh.lanLocationCode.setText(lanList.get(position).getLocationCode());
+        mvh.lanLocationPhone.setText(lanList.get(position).getLocationPhone());
+        mvh.lanLocationManager.setText(lanList.get(position).getLocationManager());
+        mvh.dateOfConfiguration.setText(lanList.get(position).getDateOfConfiguration());
     }
 
     @Override
