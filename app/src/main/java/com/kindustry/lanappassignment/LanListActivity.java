@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class LanListActivity extends AppCompatActivity {
 
     ArrayList<LAN> lanList = new ArrayList<>();
- //commitComment
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
