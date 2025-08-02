@@ -7,6 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.lang.reflect.Array;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 public class LanDataSource {
@@ -26,6 +27,7 @@ public class LanDataSource {
 
     //inserts lan into DB
     public boolean insertLan(LAN lan) {
+        open();
         boolean didSucceed = false;
         try {
             ContentValues initialValues = new ContentValues();
@@ -40,9 +42,11 @@ public class LanDataSource {
             initialValues.put("locationManager", lan.getLocationManager());
             initialValues.put("dateOfConfiguration", lan.getDateOfConfiguration());
             didSucceed = database.insert("lans", null, initialValues) > 0;
+
         } catch (Exception e) {
             // throw new RuntimeException(e);
         }
+        close();
         return didSucceed;
     }
 
@@ -87,7 +91,7 @@ public class LanDataSource {
     }
 
     public ArrayList<LAN> getLanInfo(){
-        ArrayList<LAN> lanList = new ArrayList<LAN>();
+        ArrayList<LAN> lanList = new ArrayList<>();
 
         try {
             String query = "SELECT * FROM lans";
@@ -164,7 +168,7 @@ public class LanDataSource {
     public boolean deleteLan(int lanID){
         boolean didDelete = false;
         try {
-            didDelete = database.delete("lan", "lanID" + lanID, null) > 0;
+            didDelete = database.delete("lans", "lanID" + lanID, null) > 0;
         }
         catch (Exception e){
         }

@@ -42,6 +42,7 @@ public class LanListActivity extends AppCompatActivity {
         LanDataSource lanDS = new LanDataSource(this);
         populateDB(lanDS);
 
+
         try{
             lanDS.open();
             lanList = lanDS.getLanInfo();
@@ -63,7 +64,6 @@ public class LanListActivity extends AppCompatActivity {
 
     private void populateDB(LanDataSource lanDS){
         LAN lan1 = new LAN();
-        lan1.setLanID(1234);
         lan1.setName("lan1");
         lan1.setDescription("first lan");
         lan1.setAddress("123 lan blvd.");
