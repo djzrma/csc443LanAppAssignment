@@ -5,6 +5,8 @@ import static com.google.android.material.internal.ViewUtils.hideKeyboard;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -113,6 +115,192 @@ public class AddLAN extends AppCompatActivity {
             public void onClick(View v) {
                 setForEditing(toggleButton.isChecked());
                 setForEditing(true);
+            }
+        });
+    }
+
+    private void initTextChangedEvents(){
+        /*A reference to the Rental object Customer Name EditText is assigned to the variable etCustomerName
+         * This is declared as a final because it is used inside the event code*/
+        final EditText etLanName = findViewById(R.id.nameTextField);
+        /*A text changed listener is added by creating a TextWatcher object
+         * The Textwatcher requires three methods as below*/
+        etLanName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                /*The beforeTextChanged is executed when a user presses down on a key to enter
+                 * the EditText, but before the value in the EditText is changed*/
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                /*The onTextChanged method is executed after every character change in
+                 * the EditText*/
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                /*The afterTextChanged method is called after a user completes editing the data
+                 * and leaves the EditText*/
+                currentLan.setName(etLanName.getText().toString());
+            }
+        });
+
+        final EditText etLanDescription = findViewById(R.id.descriptionTextField);
+        etLanDescription.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                currentLan.setDescription(etLanDescription.getText().toString());
+            }
+        });
+        final EditText etAddress = findViewById(R.id.addressTextField);
+        etAddress.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                currentLan.setAddress(etAddress.getText().toString());
+            }
+        });
+        final EditText etCity = findViewById(R.id.cityTextField);
+        etCity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                currentLan.setCity(etCity.getText().toString());
+            }
+        });
+        final EditText etState = findViewById(R.id.stateTextField);
+        etState.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                currentLan.setState(etState.getText().toString());
+            }
+        });
+
+        final EditText etZipCode = findViewById(R.id.zipCodeTextField);
+        etZipCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                currentLan.setZipCode(etZipCode.getText().toString());
+            }
+        });
+        final EditText etLocationCode = findViewById(R.id.locationCodeTextField);
+        etLocationCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                currentLan.setLocationCode(etLocationCode.getText().toString());
+            }
+        });
+
+        final EditText etLocationPhone = findViewById(R.id.locationPhoneTextField);
+        etLocationPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                currentLan.setLocationPhone(etLocationPhone.getText().toString());
+            }
+        });
+
+        final EditText etLocationManager = findViewById(R.id.locationManagerTextField);
+        etLocationManager.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                currentLan.setDescription(etLocationManager.getText().toString());
+            }
+        });
+
+        final EditText etDateOfConfiguration = findViewById(R.id.dateOfConfigurationTextField);
+        etLocationManager.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                currentLan.setDateOfConfiguration(etDateOfConfiguration.getText().toString());
             }
         });
     }

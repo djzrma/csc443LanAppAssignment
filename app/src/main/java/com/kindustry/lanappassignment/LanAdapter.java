@@ -4,33 +4,22 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
-public class LanAdapter extends RecyclerView.Adapter {
+public class LanAdapter extends RecyclerView.Adapter<LanAdapter.MyViewHolder> {
 
 
-    private Context context;
+    private Context parentContext;
     private ArrayList<LAN> lanList;
     private static View.OnClickListener myOnItemClickListener;
     private boolean isDeleting;
 
-    // Constructor
-    public LanAdapter(Context context, ArrayList<LAN> lanList) {
-        this.context = context;
-        this.lanList = lanList;
-    }
-
     // ViewHolder class
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView lanName, lanDescription, lanAddress, lanCity, lanState, lanZipCode, lanLocationCode, lanLocationPhone, lanLocationManager, dateOfConfiguration;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -92,17 +81,27 @@ public class LanAdapter extends RecyclerView.Adapter {
         }
     }
 
+    // Constructor
+    public LanAdapter(ArrayList<LAN> ArrayList, Context context) {
+        lanList = ArrayList;
+        parentContext = context;
+    }
+
+    public void setMyOnItemClickListener(View.OnClickListener itemClickListener){
+        myOnItemClickListener = itemClickListener;
+    }
+
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.lan_item, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        MyViewHolder mvh = (MyViewHolder) holder;
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        MyViewHolder mvh = holder;
 
         mvh.lanName.setText(lanList.get(position).getName());
         mvh.lanDescription.setText(lanList.get(position).getDescription());

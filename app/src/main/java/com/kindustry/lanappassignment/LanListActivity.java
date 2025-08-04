@@ -26,6 +26,8 @@ import java.util.ArrayList;
 public class LanListActivity extends AppCompatActivity {
 
     ArrayList<LAN> lanList = new ArrayList<>();
+    LanAdapter lanAdapter;
+    RecyclerView lans;
 
 
     @Override
@@ -40,8 +42,9 @@ public class LanListActivity extends AppCompatActivity {
         });
 
         LanDataSource lanDS = new LanDataSource(this);
-        populateDB(lanDS);
 
+        //used to create an initial entry in the db
+        //populateDB(lanDS);
 
         try{
             lanDS.open();
@@ -50,7 +53,7 @@ public class LanListActivity extends AppCompatActivity {
             RecyclerView lans = findViewById(R.id.lanRecyclerView);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
             lans.setLayoutManager(layoutManager);
-            LanAdapter lanAdapter = new LanAdapter(this, lanList);
+            LanAdapter lanAdapter = new LanAdapter(lanList, this);
             lans.setAdapter(lanAdapter);
         } catch (SQLException e){
             Toast.makeText(this, "Error retrieving lans", Toast.LENGTH_LONG).show();
@@ -62,6 +65,7 @@ public class LanListActivity extends AppCompatActivity {
         activitySwitchMessage();
     }
 
+    //inserts an entry into db
     private void populateDB(LanDataSource lanDS){
         LAN lan1 = new LAN();
         lan1.setName("lan1");
